@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASAWA LOVE CAFÉ ❤️</title>
+
+<style>
+:root{
+--pink:#f4b5ca;
+--light:#fbe3ec;
+--rose:#bd547d;
+--dark:#71384f;
+--cream:#fffaf5;
+--gold:#c99a61;
+--white:#fff;
+--shadow:0 12px 30px rgba(113,56,79,.12);
+}
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Georgia,'Times New Roman',serif;
+color:var(--dark);
+background:linear-gradient(135deg,#fffaf5,#fbe7ef,#f5d5e2);
+}
+button{font-family:Arial,sans-serif;cursor:pointer}
+.top-strip{height:8px;background:linear-gradient(90deg,#bd547d,#f4b5ca,#fffaf5,#e98eaf,#bd547d)}
+header{
+text-align:center;padding:28px 15px;background:var(--cream);
+border-bottom:1px solid #edcfda;position:relative;
+}
+.brand-small{font: bold 11px Arial;letter-spacing:5px;color:var(--rose)}
+header h1{font-size:clamp(30px,5vw,48px);letter-spacing:3px;color:#a84770;margin:9px 0}
+header p{font:11px Arial;letter-spacing:2px;color:#a8798c;margin:0}
+.header-heart{position:absolute;top:30px;font-size:27px;color:#e7a4bc}
+.header-heart.left{left:8%}.header-heart.right{right:8%}
+
+.layout{
+max-width:1450px;margin:30px auto;padding:0 22px;
+display:grid;grid-template-columns:290px minmax(0,1fr);gap:24px;align-items:start;
+}
+.cart-panel{
+background:var(--cream);border:1px solid #efd4df;padding:22px;
+box-shadow:var(--shadow);position:sticky;top:15px;
+}
+.cart-heading{text-align:center;border-bottom:1px solid #e8c5d2;padding-bottom:15px;margin-bottom:12px}
+.cart-heading h2{font-size:21px;letter-spacing:2px;margin:0 0 5px;color:#a84770}
+.cart-heading span{font:11px Arial;color:#a8798c}
+.cart-items{max-height:420px;overflow-y:auto}
+.empty-cart{text-align:center;padding:35px 5px;font:13px Arial;color:#a8798c;line-height:1.6}
+.cart-item{
+display:flex;justify-content:space-between;gap:8px;padding:12px 0;
+border-bottom:1px dashed #e8c5d2;font:12px Arial;
+}
+.cart-item-name{font-weight:bold}.cart-item-price{color:#a8798c;margin-top:4px}
+.qty-controls{display:flex;align-items:center;gap:8px;margin-top:8px}
+.qty-controls button{width:25px;height:25px;border:0;background:#f8dce7;color:#8f4264;font-weight:bold}
+.remove-btn{background:#fff0f3!important;color:#b44!important}
+.cart-total{
+display:flex;justify-content:space-between;border-top:2px solid #dba6b9;
+padding-top:15px;margin:18px 0;font:bold 17px Arial;
+}
+.btn{border:0;padding:13px 15px;font-weight:bold;transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.btn-primary{background:#bd547d;color:white}
+.btn-secondary{background:#f5dce6;color:#8f4264}
+.cart-actions{display:grid;gap:9px}.cart-actions button{width:100%}
+.menu-area{min-width:0}
+.welcome{
+background:var(--cream);border:1px solid #efd4df;padding:23px;
+margin-bottom:22px;text-align:center;box-shadow:var(--shadow);
+}
+.welcome-label{font:bold 10px Arial;letter-spacing:4px;color:var(--rose)}
+.welcome h2{font-size:26px;margin:10px 0;color:#a84770}
+.welcome p{font:13px/1.6 Arial;color:#a8798c;margin:0}
+
+.featured{
+background:var(--cream);border:1px solid #e8c5d2;
+display:grid;grid-template-columns:1fr 1.1fr;gap:24px;
+padding:20px;margin-bottom:25px;box-shadow:var(--shadow);align-items:center;
+}
+.featured-copy{padding:12px}
+.featured-label{
+display:inline-block;background:#f5dce6;color:#a84770;
+padding:7px 12px;font:bold 10px Arial;letter-spacing:2px;
+}
+.featured h2{font-size:36px;color:#a84770;margin:15px 0 8px}
+.featured p{font:13px/1.7 Arial;color:#a8798c}
+.featured-price{font:bold 27px Arial;color:#bd547d;margin:15px 0}
+.featured-image-wrap{
+perspective:1200px;background:#f8e6eb;padding:9px;border:1px solid #e8c5d2;
+}
+.featured-image{
+width:100%;height:290px;display:block;object-fit:cover;
+background:#f8dce7;border:0;
+animation:featured3D 5s ease-in-out infinite;
+transform-style:preserve-3d;
+}
+@keyframes featured3D{
+0%,100%{transform:translateY(0) rotateX(0deg) rotateY(-2deg) scale(1)}
+25%{transform:translateY(-8px) rotateX(3deg) rotateY(2deg) scale(1.01)}
+50%{transform:translateY(-13px) rotateX(-2deg) rotateY(4deg) scale(1.02)}
+75%{transform:translateY(-6px) rotateX(2deg) rotateY(-3deg) scale(1.01)}
+}
+.featured-image-wrap:hover .featured-image{animation-play-state:paused;transform:translateY(-10px) rotateY(-7deg) rotateX(5deg) scale(1.04)}
+
+.menu-topline{display:flex;align-items:center;gap:14px;margin:28px 0 17px}
+.menu-topline h2{font-size:25px;letter-spacing:2px;color:#a84770;margin:0;white-space:nowrap}
+.menu-topline:after{content:"";height:1px;background:#dba6b9;width:100%}
+.tabs{display:flex;gap:10px;margin-bottom:23px}
+.tab{
+padding:13px 24px;background:var(--cream);border:1px solid #e8c5d2;
+color:#a84770;font-weight:bold;letter-spacing:1px;
+}
+.tab.active{background:#bd547d;color:white;border-color:#bd547d}
+.category-title{
+display:flex;align-items:center;gap:12px;font-size:18px;
+letter-spacing:2px;color:#a84770;margin:27px 0 14px;
+}
+.category-title:after{content:"";height:1px;background:#e5bdcc;flex:1}
+.food-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.food-card{
+background:var(--cream);border:1px solid #efd4df;
+box-shadow:var(--shadow);overflow:hidden;transition:.35s;
+perspective:1100px;
+}
+.food-card:hover{transform:translateY(-7px);box-shadow:0 18px 32px #71384f2b}
+.picture-stage{
+height:180px;background:#f8e6eb;padding:10px;
+overflow:hidden;perspective:1100px;position:relative;
+display:flex;align-items:center;justify-content:center;
+}
+.picture-shadow{
+position:absolute;bottom:9px;width:65%;height:12px;
+background:#71384f40;filter:blur(9px);border-radius:50%;
+animation:shadowMove 4s ease-in-out infinite;
+}
+.food-picture{
+width:100%;height:100%;object-fit:cover;display:block;
+position:relative;z-index:1;
+transform-style:preserve-3d;
+backface-visibility:hidden;
+animation:food3D 4s ease-in-out infinite;
+transition:filter .4s;
+}
+.food-card:nth-child(3n+1) .food-picture{animation-delay:-1.2s}
+.food-card:nth-child(3n+2) .food-picture{animation-delay:-2.3s}
+.food-card:hover .food-picture{
+animation-play-state:paused;
+transform:translateY(-9px) rotateX(7deg) rotateY(-8deg) scale(1.07);
+filter:saturate(1.15) brightness(1.04);
+}
+@keyframes food3D{
+0%,100%{transform:translateY(0) rotateX(0deg) rotateY(-2deg) rotateZ(-1deg)}
+25%{transform:translateY(-7px) rotateX(4deg) rotateY(3deg) rotateZ(1deg)}
+50%{transform:translateY(-13px) rotateX(-3deg) rotateY(5deg) rotateZ(1deg)}
+75%{transform:translateY(-6px) rotateX(3deg) rotateY(-4deg) rotateZ(-1deg)}
+}
+@keyframes shadowMove{
+0%,100%{transform:scale(1);opacity:.5}
+50%{transform:scale(.7);opacity:.2}
+}
+.food-info{padding:14px}
+.food-info h3{font-size:16px;margin:0 0 7px;color:#81425c}
+.food-info p{font:11px/1.5 Arial;color:#a8798c;margin:0;min-height:28px}
+.food-bottom{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-top:13px}
+.food-price{font:bold 16px Arial;color:#bd547d}
+.add-btn{border:0;background:#bd547d;color:white;padding:9px 12px;font:bold 11px Arial}
+.hidden{display:none!important}
+
+.modal-overlay{
+position:fixed;inset:0;background:#401f2eae;display:none;
+align-items:center;justify-content:center;z-index:1000;
+padding:15px;backdrop-filter:blur(4px);
+}
+.modal-overlay.show{display:flex}
+.modal{
+width:100%;max-width:460px;background:var(--cream);
+padding:27px;border:1px solid #e8c5d2;
+box-shadow:0 20px 60px #35132355;animation:modalPop .3s ease;
+max-height:90vh;overflow-y:auto;
+}
+@keyframes modalPop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.modal h2{margin:0 0 10px;color:#a84770}
+.modal p{font:13px/1.6 Arial;color:#a8798c}
+.payment-choice{display:grid;gap:12px;margin:20px 0}
+.payment-option{
+padding:17px;border:1px solid #e8c5d2;background:#fff4f7;
+text-align:left;font:bold 15px Arial;color:#8f4264;
+}
+.payment-option:hover{background:#f8dce7;border-color:#bd547d}
+.modal-buttons{display:flex;gap:10px;margin-top:18px}
+.modal-buttons button{flex:1}
+.form-group{margin:12px 0}
+.form-group label{display:block;font:bold 12px Arial;margin-bottom:6px}
+.form-group input{width:100%;padding:12px;border:1px solid #e8c5d2;background:white;font-size:14px;outline:none}
+.form-group input:focus{border-color:#bd547d}
+.thank-you{text-align:center;padding:10px 0}
+.big-heart{font-size:65px;animation:heartBeat 1s infinite}
+@keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.kiss-animation{font-size:32px;letter-spacing:7px;animation:kissFloat 2s ease-in-out infinite}
+@keyframes kissFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.order-summary{
+background:#fff0f5;border:1px solid #efd4df;padding:14px;margin:15px 0;
+text-align:left;font:12px/1.9 Arial;
+}
+.footer{
+background:#fffaf5;border-top:1px solid #efd4df;text-align:center;
+padding:25px;font:11px Arial;letter-spacing:2px;color:#a8798c;
+}
+@media(max-width:1000px){.food-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:750px){
+.layout{grid-template-columns:1fr}
+.cart-panel{position:relative;top:0}
+.featured{grid-template-columns:1fr}
+.featured-image{height:230px}
+.header-heart{display:none}
+}
+@media(max-width:430px){
+.food-grid{grid-template-columns:1fr}
+.tabs{display:grid;grid-template-columns:1fr 1fr}
+.menu-topline h2{font-size:19px}
+}
+</style>
+</head>
+
+<body>
+<div class="top-strip"></div>
+
+<header>
+<div class="header-heart left">♡</div>
+<div class="header-heart right">♡</div>
+<div class="brand-small">WELCOME TO</div>
+<h1>ASAWA LOVE CAFÉ</h1>
+<p>GOOD FOOD • SWEET MOMENTS • MADE WITH LOVE</p>
+</header>
+
+<div class="layout">
+<aside class="cart-panel">
+<div class="cart-heading">
+<h2>MY ORDER</h2>
+<span>YOUR SELECTIONS</span>
+</div>
+<div class="cart-items" id="cartItems">
+<div class="empty-cart">Your order is empty.<br>Choose something delicious! ♡</div>
+</div>
+<div class="cart-total">
+<span>TOTAL</span><span id="cartTotal">₱0.00</span>
+</div>
+<div class="cart-actions">
+<button class="btn btn-primary" onclick="checkout()">PLACE MY ORDER ♥</button>
+<button class="btn btn-secondary" onclick="clearCart()">CLEAR ORDER</button>
+</div>
+</aside>
+
+<main class="menu-area">
+<section class="welcome">
+<div class="welcome-label">A LITTLE PLACE FULL OF LOVE</div>
+<h2>Delicious Moments Start Here</h2>
+<p>Welcome to our café. Explore our freshly prepared meals, favorite comfort food, and refreshing drinks.</p>
+</section>
+
+<section class="featured">
+<div class="featured-copy">
+<span class="featured-label">✦ HOUSE SPECIAL ✦</span>
+<h2>Bangsilog</h2>
+<p>Our Filipino breakfast favorite! Enjoy delicious fried bangus, flavorful garlic rice, and a perfectly cooked egg.</p>
+<div class="featured-price">₱120.00</div>
+<button class="btn btn-primary" onclick="addItem('Bangsilog',120)">ADD TO MY ORDER ♥</button>
+</div>
+
+<div class="featured-image-wrap">
+<img
+class="featured-image"
+src="https://upload.wikimedia.org/wikipedia/commons/9/91/Bangsilog.jpg"
+alt="Authentic Bangsilog with fried bangus, garlic rice and egg"
+onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Bangsilog.jpg/960px-Bangsilog.jpg'">
+</div>
+</section>
+
+<div class="menu-topline"><h2>OUR MENU</h2></div>
+<div class="tabs">
+<button class="tab active" id="foodTab" onclick="showPage('food')">FOOD MENU</button>
+<button class="tab" id="drinkTab" onclick="showPage('drinks')">BEVERAGES</button>
+</div>
+
+<section id="foodPage">
+<h2 class="category-title">SILOG MEALS</h2>
+<div class="food-grid" id="silogGrid"></div>
+<h2 class="category-title">RESTAURANT FAVORITES</h2>
+<div class="food-grid" id="restaurantGrid"></div>
+<h2 class="category-title">PASTA SELECTION</h2>
+<div class="food-grid" id="pastaGrid"></div>
+<h2 class="category-title">EXTRA RICE</h2>
+<div class="food-grid" id="riceGrid"></div>
+</section>
+
+<section id="drinksPage" class="hidden">
+<h2 class="category-title">TEA COLLECTION</h2>
+<div class="food-grid" id="teaGrid"></div>
+<h2 class="category-title">COFFEE & MILK</h2>
+<div class="food-grid" id="coffeeGrid"></div>
+<h2 class="category-title">SPECIAL DRINKS</h2>
+<div class="food-grid" id="specialGrid"></div>
+</section>
+</main>
+</div>
+
+<footer class="footer">ASAWA LOVE CAFÉ ♡ | THANK YOU FOR VISITING</footer>
+
+<div class="modal-overlay" id="paymentModal">
+<div class="modal">
+<h2>HOW WOULD YOU LIKE TO PAY?</h2>
+<p>Choose your payment method, my love.</p>
+<div class="payment-choice">
+<button class="payment-option" onclick="kissPayment()">💋 Kiss na lang bayad ko</button>
+<button class="payment-option" onclick="showCardForm()">💳 Credit Card</button>
+</div>
+<button class="btn btn-secondary" style="width:100%" onclick="closeModal()">CANCEL</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="kissModal">
+<div class="modal">
+<div class="thank-you">
+<div class="big-heart">💗</div>
+<h2>ARE YOU SURE, MY LOVE?</h2>
+<p>Your kisses are accepted as payment! 💋</p>
+<div class="kiss-animation">😘 💋 😘</div>
+<div class="modal-buttons">
+<button class="btn btn-secondary" onclick="backToPayment()">BACK</button>
+<button class="btn btn-primary" onclick="finishOrder('Kiss na lang bayad ko 💋')">YES! CONFIRM ♥</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="cardModal">
+<div class="modal">
+<h2>💳 CREDIT CARD PAYMENT</h2>
+<p>Demo only. Do not enter real card details. This form does not process payments.</p>
+<form id="cardForm" onsubmit="submitCard(event)">
+<div class="form-group">
+<label>Cardholder Name</label>
+<input id="cardName" type="text" placeholder="Demo Name" required>
+</div>
+<div class="form-group">
+<label>Card Number (Demo)</label>
+<input id="cardNumber" type="text" maxlength="19" placeholder="1234 5678 9012 3456" required>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div class="form-group">
+<label>Expiry Date</label>
+<input id="cardExpiry" type="text" maxlength="5" placeholder="MM/YY" required>
+</div>
+<div class="form-group">
+<label>CVV</label>
+<input id="cardCvv" type="password" maxlength="4" placeholder="123" required>
+</div>
+</div>
+<div class="modal-buttons">
+<button type="button" class="btn btn-secondary" onclick="backToPayment()">BACK</button>
+<button type="submit" class="btn btn-primary">CONFIRM ORDER</button>
+</div>
+</form>
+</div>
+</div>
+
+<div class="modal-overlay" id="thankModal">
+<div class="modal">
+<div class="thank-you">
+<div class="big-heart">❤️</div>
+<h2>THANK YOU FOR ORDERING, MY ASAWA!</h2>
+<p>Your order has been confirmed. Thank you for choosing our café! Sending you lots of love!</p>
+<div class="kiss-animation">💋 😘 💗 😘 💋</div>
+<div class="order-summary" id="finalSummary"></div>
+<button class="btn btn-primary" style="width:100%" onclick="closeThankYou()">DONE ♥</button>
+</div>
+</div>
+</div>
+
+<script>
+const menuData={
+silog:[
+{name:"Tapsilog",price:130,desc:"Beef tapa, garlic rice and egg",image:"https://images.unsplash.com/photo-1547592180-85f173990554?w=700&auto=format&fit=crop&q=85"},
+{name:"Tocilog",price:120,desc:"Sweet pork tocino with rice and egg",image:"https://images.unsplash.com/photo-1544025162-d76694265947?w=700&auto=format&fit=crop&q=85"},
+{name:"Hotsilog",price:100,desc:"Hotdog, garlic rice and egg",image:"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=700&auto=format&fit=crop&q=85"},
+{name:"Longsilog",price:120,desc:"Longganisa, garlic rice and egg",image:"https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=700&auto=format&fit=crop&q=85"},
+{name:"Porksilog",price:130,desc:"Pork, garlic rice and egg",image:"https://images.unsplash.com/photo-1544025162-d76694265947?w=700&auto=format&fit=crop&q=85"},
+{name:"Chicksilog",price:140,desc:"Chicken, garlic rice and egg",image:"https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=700&auto=format&fit=crop&q=85"}
+],
+restaurant:[
+{name:"Mang Inasal Chicken",price:150,desc:"Grilled chicken with rice",image:"https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=700&auto=format&fit=crop&q=85"},
+{name:"Mang Inasal Pork BBQ",price:130,desc:"Grilled pork barbecue",image:"https://images.unsplash.com/photo-1544025162-d76694265947?w=700&auto=format&fit=crop&q=85"},
+{name:"Chicken Inasal Paa",price:160,desc:"Juicy grilled chicken leg",image:"https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=700&auto=format&fit=crop&q=85"},
+{name:"Jollibee-Style Spaghetti",price:95,desc:"Sweet Filipino-style spaghetti",image:"https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=700&auto=format&fit=crop&q=85"},
+{name:"Chickenjoy-Style Meal",price:125,desc:"Crispy fried chicken meal",image:"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=700&auto=format&fit=crop&q=85"},
+{name:"Burger Steak",price:110,desc:"Beef patty with savory gravy",image:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&auto=format&fit=crop&q=85"}
+],
+pasta:[
+{name:"Creamy Pesto",price:150,desc:"Creamy basil pesto pasta",image:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=700&auto=format&fit=crop&q=85"},
+{name:"Classic Pesto",price:140,desc:"Classic basil pesto pasta",image:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=700&auto=format&fit=crop&q=85"},
+{name:"Carbonara",price:145,desc:"Creamy carbonara pasta",image:"https://images.unsplash.com/photo-1612874742237-6526221588e3?w=700&auto=format&fit=crop&q=85"},
+{name:"Filipino Spaghetti",price:120,desc:"Sweet-style spaghetti with cheese",image:"https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=700&auto=format&fit=crop&q=85"},
+{name:"Tuna Pasta",price:130,desc:"Tuna pasta with creamy sauce",image:"https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=700&auto=format&fit=crop&q=85"},
+{name:"Baked Macaroni",price:140,desc:"Cheesy baked macaroni",image:"https://images.unsplash.com/photo-1547592180-85f173990554?w=700&auto=format&fit=crop&q=85"}
+],
+rice:[
+{name:"Extra Garlic Rice",price:20,desc:"Extra serving of garlic rice",image:"https://images.unsplash.com/photo-1516684732162-798a0062be99?w=700&auto=format&fit=crop&q=85"},
+{name:"Extra Plain Rice",price:15,desc:"Extra serving of steamed rice",image:"https://images.unsplash.com/photo-1516684732162-798a0062be99?w=700&auto=format&fit=crop&q=85"},
+{name:"UNLI RICE",price:35,desc:"Unlimited rice add-on",image:"https://images.unsplash.com/photo-1516684732162-798a0062be99?w=700&auto=format&fit=crop&q=85"}
+],
+tea:[
+{name:"Lemon Tea",price:65,desc:"Refreshing lemon iced tea",image:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=700&auto=format&fit=crop&q=85"},
+{name:"Red Tea",price:60,desc:"Refreshing chilled red tea",image:"https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=700&auto=format&fit=crop&q=85"},
+{name:"Peach Tea",price:70,desc:"Sweet peach iced tea",image:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=700&auto=format&fit=crop&q=85"},
+{name:"Lychee Tea",price:70,desc:"Sweet and refreshing lychee tea",image:"https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=700&auto=format&fit=crop&q=85"}
+],
+coffee:[
+{name:"Iced Coffee",price:80,desc:"Chilled coffee over ice",image:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=700&auto=format&fit=crop&q=85"},
+{name:"Spanish Latte",price:95,desc:"Sweet creamy Spanish latte",image:"https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=700&auto=format&fit=crop&q=85"},
+{name:"Chocolate Milk",price:75,desc:"Cold chocolate milk",image:"https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=700&auto=format&fit=crop&q=85"},
+{name:"Matcha Latte",price:95,desc:"Creamy matcha latte",image:"https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=700&auto=format&fit=crop&q=85"}
+],
+special:[
+{name:"Strawberry Milk",price:90,desc:"Sweet strawberry milk",image:"https://images.unsplash.com/photo-1553787499-6f9133860278?w=700&auto=format&fit=crop&q=85"},
+{name:"Mango Shake",price:95,desc:"Refreshing mango shake",image:"https://images.unsplash.com/photo-1546173159-315724a31696?w=700&auto=format&fit=crop&q=85"},
+{name:"Chocolate Shake",price:85,desc:"Rich chocolate milkshake",image:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=700&auto=format&fit=crop&q=85"},
+{name:"Cookies & Cream",price:100,desc:"Cookies and cream milkshake",image:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=700&auto=format&fit=crop&q=85"}
+]
+};
+
+let cart=[];
+
+function money(value){return "₱"+value.toFixed(2)}
+
+function renderMenu(){
+const targets={
+silog:"silogGrid",restaurant:"restaurantGrid",pasta:"pastaGrid",
+rice:"riceGrid",tea:"teaGrid",coffee:"coffeeGrid",special:"specialGrid"
+};
+
+Object.keys(menuData).forEach(category=>{
+const container=document.getElementById(targets[category]);
+container.innerHTML=menuData[category].map(item=>`
+<div class="food-card">
+<div class="picture-stage">
+<div class="picture-shadow"></div>
+<img class="food-picture"
+src="${item.image}"
+alt="${item.name}"
+loading="lazy"
+referrerpolicy="no-referrer"
+onerror="this.onerror=null;this.src='https://placehold.co/700x450/f8dce7/8f4264?text=${encodeURIComponent(item.name)}'">
+</div>
+<div class="food-info">
+<h3>${item.name}</h3>
+<p>${item.desc}</p>
+<div class="food-bottom">
+<span class="food-price">${money(item.price)}</span>
+<button class="add-btn" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price})">+ ADD</button>
+</div>
+</div>
+</div>
+`).join("");
+});
+}
+
+function showPage(page){
+document.getElementById("foodPage").classList.toggle("hidden",page!=="food");
+document.getElementById("drinksPage").classList.toggle("hidden",page!=="drinks");
+document.getElementById("foodTab").classList.toggle("active",page==="food");
+document.getElementById("drinkTab").classList.toggle("active",page==="drinks");
+}
+
+function addItem(name,price){
+const existing=cart.find(item=>item.name===name);
+if(existing)existing.qty++;
+else cart.push({name,price,qty:1});
+renderCart();
+}
+
+function changeQty(name,amount){
+const item=cart.find(item=>item.name===name);
+if(!item)return;
+item.qty+=amount;
+if(item.qty<=0)cart=cart.filter(item=>item.name!==name);
+renderCart();
+}
+
+function removeItem(name){
+cart=cart.filter(item=>item.name!==name);
+renderCart();
+}
+
+function clearCart(){cart=[];renderCart()}
+
+function getTotal(){
+return cart.reduce((sum,item)=>sum+item.price*item.qty,0);
+}
+
+function renderCart(){
+const container=document.getElementById("cartItems");
+if(cart.length===0){
+container.innerHTML='<div class="empty-cart">Your order is empty.<br>Choose something delicious! ♡</div>';
+}else{
+container.innerHTML=cart.map(item=>`
+<div class="cart-item">
+<div>
+<div class="cart-item-name">${item.name}</div>
+<div class="cart-item-price">${money(item.price)} each</div>
+<div class="qty-controls">
+<button onclick="changeQty('${item.name.replace(/'/g,"\\'")}',-1)">−</button>
+<span>${item.qty}</span>
+<button onclick="changeQty('${item.name.replace(/'/g,"\\'")}',1)">+</button>
+</div>
+</div>
+<div>
+<strong>${money(item.price*item.qty)}</strong>
+<div class="qty-controls">
+<button class="remove-btn" onclick="removeItem('${item.name.replace(/'/g,"\\'")}')">×</button>
+</div>
+</div>
+</div>
+`).join("");
+}
+document.getElementById("cartTotal").textContent=money(getTotal());
+}
+
+function openModal(id){document.getElementById(id).classList.add("show")}
+function closeModal(){document.querySelectorAll(".modal-overlay").forEach(modal=>modal.classList.remove("show"))}
+
+function checkout(){
+if(cart.length===0){alert("Please add something to your order first! ♡");return}
+openModal("paymentModal");
+}
+
+function kissPayment(){closeModal();openModal("kissModal")}
+function backToPayment(){closeModal();openModal("paymentModal")}
+function showCardForm(){closeModal();openModal("cardModal")}
+
+function submitCard(event){
+event.preventDefault();
+const name=document.getElementById("cardName").value.trim();
+const number=document.getElementById("cardNumber").value.replace(/\s/g,"");
+const expiry=document.getElementById("cardExpiry").value.trim();
+const cvv=document.getElementById("cardCvv").value.trim();
+
+if(!name||!/^\d{13,19}$/.test(number)||!/^\d{2}\/\d{2}$/.test(expiry)||!/^\d{3,4}$/.test(cvv)){
+alert("Please enter valid DEMO information. Do not use real card details.");
+return;
+}
+finishOrder("Credit Card (Demo Only)");
+}
+
+function finishOrder(paymentMethod){
+const orderCopy=cart.map(item=>({...item}));
+const total=getTotal();
+const summary=orderCopy.map(item=>
+`${item.name} × ${item.qty} — ${money(item.price*item.qty)}`
+).join("<br>");
+
+document.getElementById("finalSummary").innerHTML=`
+<strong>YOUR ORDER ♡</strong><br>
+${summary}
+<hr style="border:0;border-top:1px dashed #dba6b9">
+<strong>Total: ${money(total)}</strong><br>
+<strong>Payment: ${paymentMethod}</strong>
+`;
+closeModal();
+openModal("thankModal");
+cart=[];
+renderCart();
+}
+
+function closeThankYou(){
+closeModal();
+document.getElementById("cardForm").reset();
+}
+
+document.querySelectorAll(".modal-overlay").forEach(overlay=>{
+overlay.addEventListener("click",function(event){
+if(event.target===overlay)overlay.classList.remove("show");
+});
+});
+
+renderMenu();
+renderCart();
+</script>
+</body>
+</html>
